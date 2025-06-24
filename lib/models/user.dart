@@ -1,36 +1,44 @@
+// lib/models/user.dart
 class User {
-  final String id;
-  final String username;
-  final String password;
-  final String role; // admin or customer
+  String id;
+  String username;
+  String password;
+  String role;
+  String? email;
+  String? address;
+  String? securityQuestion;
+  String? securityAnswer;
 
   User({
     required this.id,
     required this.username,
     required this.password,
     required this.role,
+    this.email,
+    this.address,
+    this.securityQuestion,
+    this.securityAnswer,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'] as String,
-      username: json['username'] as String,
-      password: json['password'] as String,
-      role: json['role'] as String,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'username': username,
+    'password': password,
+    'role': role,
+    'email': email,
+    'address': address,
+    'securityQuestion': securityQuestion,
+    'securityAnswer': securityAnswer,
+  };
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'username': username,
-      'password': password,
-      'role': role,
-    };
-  }
-
-  @override
-  String toString() {
-    return '$username | Role: $role';
-  }
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json['id'],
+    username: json['username'],
+    password: json['password'],
+    role: json['role'],
+    email: json['email'],
+    address: json['address'],
+    securityQuestion: json['securityQuestion'],
+    securityAnswer: json['securityAnswer'],
+  );
 }
